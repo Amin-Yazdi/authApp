@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-// import { View } from 'react-native';
-import { Button, Card, CardSection, Header } from './common';
+import { TextInput } from 'react-native';
+import { Button, Card, CardSection } from './common';
 
 class LoginForm extends Component {
+    state = { text: '' };
     render() {
         return (
             <Card>
-                <Header headerText="yooyoo" />
-                <CardSection />
+                <CardSection >
+                    <TextInput 
+                        style={{ height: 50, width: 100 }}
+                        value={this.state.text}
+                        onChangeText={text => this.setState({ text })}
+                    />
+                </CardSection>
                 <CardSection />
                 <CardSection>
                     <Button>
