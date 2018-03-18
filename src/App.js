@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <View>
-                <Header headerText={'TEXT'} />
+                <Header headerText={'Welcome'} />
                 <LoginForm />
             </View>
         );
