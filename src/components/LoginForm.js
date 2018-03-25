@@ -13,11 +13,29 @@ class LoginForm extends Component {
     onButtonPress() {
         const { email, password } = this.state;
         this.setState({ error: '', waitForlogin: true });
-        Firebase.auth().signInWithEmailAndPassword(email, password).catch(() => {
-            Firebase.auth().createUserWithEmailAndPassword(email, password).catch(() => {
-              this.setState({ error: 'Failed Attempt', waitForlogin: false });
-              this.renderButton();
-            });
+        Firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(this.onLoginSuccess.bind(this))
+        .catch(() => {
+            Firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(this.onLoginSuccess.bind(this))
+            .catch(
+              this.onLoginFail.bind(this)
+            );
+        });
+    }
+
+    onLoginFail() {
+        this.setState({
+            waitForlogin: false,
+            error: 'Failed Attempt'
+        });
+    }
+    onLoginSuccess() {
+        this.setState({
+            email: '',
+            password: '',
+            waitForlogin: false,
+            error: ''
         });
     }
 
